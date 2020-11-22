@@ -12,8 +12,10 @@ add_executable("${PROJECT_NAME}"
 )
 
 add_library(svg
-    "SVG.h"
-    "SVG.cpp"
+    "svg.h"
+    "svg.cpp"
+    "LineSpec.h"
+    "LineSpec.cpp"
 )
 
 add_library(svg::svg ALIAS svg)
@@ -31,5 +33,5 @@ if(MSVC)
 endif(MSVC)
 
 if(UNIX)
-    target_link_libraries ("${PROJECT_NAME}" svgPlot)
+    target_link_libraries ("${PROJECT_NAME}" svg)
 endif(UNIX)
