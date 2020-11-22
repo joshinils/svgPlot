@@ -10,8 +10,10 @@ int main()
     s.plot(V, V);std::cout << '\n';
     s.plot(V, V, V);std::cout << '\n';
     s.plot(V, V, V, V);std::cout << '\n';
-    //s.plot(V, V, V, V, V);std::cout << '\n';
+    s.plot(V, V, V, V, V);std::cout << '\n';
     s.plot(V, V, V, V, V, V);std::cout << '\n';
+    s.plot(V, V, V, V, V, V, V);std::cout << '\n';
+    s.plot(V, V, V, V, V, V, V, V);std::cout << '\n';
     // clang-format on
 
     return 0;
