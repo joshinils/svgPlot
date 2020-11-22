@@ -1,0 +1,16 @@
+.vscode
+cmake-build-debug/*
+cmake-build-release/*
+build/*
+.idea/
+images_fake/*
+Thumbs.db
+*.code-workspace
+
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+out
+.vs
