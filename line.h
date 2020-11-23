@@ -22,8 +22,8 @@ public:
     {
         std::stringstream ss;
         ss << std::setprecision(17);
-        ss << "<line x1=\"" << this->_x1 << "\" y1=\"" << this->_y1 << "\" x2=\"" << this->_x2 << "\" y2=\""
-           << this->_y2 << "\" stroke=\"black\" stroke-width=\"1%\"/>";
+        ss << "<line x1=\"" << this->_x1 << "\" y1=\"" << -this->_y1 << "\" x2=\"" << this->_x2 << "\" y2=\""
+           << -this->_y2 << "\" stroke=\"black\" stroke-width=\"1px\"/>";
         return ss.str();
     }
 

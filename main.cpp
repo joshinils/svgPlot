@@ -15,9 +15,11 @@ int main()
 {
     svg s;
 
+    s.addDrawable(std::make_shared<line<double>>(line<double>(0, 0, 10, 10)));
+
     size_t count  = 1000;
     double minVal = 0;
-    double maxVal = std::acos(-1) * 2;
+    double maxVal = std::acos(-1) * 2 * 15;
     double range  = maxVal - minVal;
     double dx     = range / (count - 1);
 

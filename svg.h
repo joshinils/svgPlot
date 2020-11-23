@@ -132,6 +132,8 @@ public:
 
     //void plot() { std::cout << __FILE__ << ':' << __LINE__ << ' ' << __PRETTY_FUNCTION__ << " empty case\n"; }
 
+    void addDrawable(std::shared_ptr<svgDrawable> p) { this->drawables.emplace_back(p); }
+
 private:
     mutable bool writeOnDestruct = true;
 
@@ -141,8 +143,8 @@ private:
     double minY = std::numeric_limits<double>::max();
     double maxY = std::numeric_limits<double>::min();
 
-    double apparentWidth  = -1;
-    double apparentHeight = -1;
+    double apparentWidth  = 1000;
+    double apparentHeight = 1000;
 
     std::vector<std::shared_ptr<svgDrawable>> drawables;
 };
