@@ -1,3 +1,4 @@
+#pragma once
 #include "svgDrawable.h"
 #include <exception>
 #include <sstream>

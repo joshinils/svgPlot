@@ -22,6 +22,12 @@ add_library(svg
     "line.cpp"
     "svgDrawable.h"
     "svgDrawable.cpp"
+    "axis.h"
+    "axis.cpp"
+    "xAxis.h"
+    "xAxis.cpp"
+    "yAxis.h"
+    "yAxis.cpp"
 )
 
 add_library(svg::svg ALIAS svg)

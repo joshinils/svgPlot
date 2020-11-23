@@ -1,3 +1,4 @@
+#pragma once
 #include "LineSpec.h"
 #include "line.h"
 #include <iostream>
@@ -41,8 +42,8 @@ public:
 
         for(size_t i = 0; i + 1 < std::min(x.size(), y.size()); i++)
         {
-            auto b = line<double>(x[i], y[i], x[i + 1], y[i + 1]);
-            auto a = std::make_shared<line<double>>(b);
+            auto b = Line<double>(x[i], y[i], x[i + 1], y[i + 1]);
+            auto a = std::make_shared<Line<double>>(b);
             this->drawables.emplace_back(a);
         }
     }
@@ -136,6 +137,13 @@ public:
 
 private:
     mutable bool writeOnDestruct = true;
+
+    template<typename T>
+    friend class Axis;
+    template<typename T>
+    friend class XAxis;
+    template<typename T>
+    friend class YAxis;
 
     // axis limits
     double minX = std::numeric_limits<double>::max();
