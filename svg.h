@@ -1,5 +1,9 @@
 #include "LineSpec.h"
+#include "line.h"
 #include <iostream>
+#include <limits>
+#include <memory>
+#include <vector>
 
 /* to construct an svg image.
  * if any element is added the destructor will automatically print to file.
@@ -20,7 +24,27 @@ public:
     {
         // base case for pairs
         std::cout << __FILE__ << ':' << __LINE__ << ' ' << __PRETTY_FUNCTION__ << " base case double\n";
+
         // todo implement plot
+
+        for(const auto& xElem : x)
+        {
+            this->maxX = std::max(this->maxX, xElem);
+            this->minX = std::min(this->minX, xElem);
+        }
+
+        for(const auto& yElem : y)
+        {
+            this->maxY = std::max(this->maxY, yElem);
+            this->minY = std::min(this->minY, yElem);
+        }
+
+        for(size_t i = 0; i + 1 < std::min(x.size(), y.size()); i++)
+        {
+            auto b = line<double>(x[i], y[i], x[i + 1], y[i + 1]);
+            auto a = std::make_shared<line<double>>(b);
+            this->drawables.emplace_back(a);
+        }
     }
 
     template<typename V>
@@ -92,8 +116,10 @@ public:
         // base case for single
         std::cout << __FILE__ << ':' << __LINE__ << ' ' << __PRETTY_FUNCTION__ << " base case single\n";
 
-        // todo delegate plot to plot with generated index vector as x arg
-        plot(y, y, ls); // stand-in
+        V x(y);
+        for(size_t i = 0; i < y.size(); i++) { x[i] = i; }
+
+        plot(x, y, ls);
     }
 
     template<typename V, typename... Param>
@@ -108,4 +134,15 @@ public:
 
 private:
     mutable bool writeOnDestruct = true;
+
+    // axis limits
+    double minX = std::numeric_limits<double>::max();
+    double maxX = std::numeric_limits<double>::min();
+    double minY = std::numeric_limits<double>::max();
+    double maxY = std::numeric_limits<double>::min();
+
+    double apparentWidth  = -1;
+    double apparentHeight = -1;
+
+    std::vector<std::shared_ptr<svgDrawable>> drawables;
 };

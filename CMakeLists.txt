@@ -16,6 +16,12 @@ add_library(svg
     "svg.cpp"
     "LineSpec.h"
     "LineSpec.cpp"
+    "polyline.h"
+    "polyline.cpp"
+    "line.h"
+    "line.cpp"
+    "svgDrawable.h"
+    "svgDrawable.cpp"
 )
 
 add_library(svg::svg ALIAS svg)

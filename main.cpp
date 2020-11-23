@@ -1,50 +1,36 @@
 #include "svg.h"
+#include <cmath>
 #include <iostream>
+#include <vector>
+
+template<typename T>
+std::ostream& operator<<(std::ostream& ostr, const std::vector<T>& v)
+{
+    for(size_t i = 0; i + 1 < v.size(); i++) { ostr << v[i] << ", "; }
+
+    return ostr << v[v.size() - 1];
+}
+
 int main()
 {
     svg s;
-    int V;
-    LineSpec L;
 
-    // clang-format off
-    
-    s.plot(V);std::cout << '\n';
-    s.plot(V, L);std::cout << '\n';
+    size_t count  = 1000;
+    double minVal = 0;
+    double maxVal = std::acos(-1) * 2;
+    double range  = maxVal - minVal;
+    double dx     = range / (count - 1);
 
-    // s.plot(V, V, V);std::cout << '\n';
-    // s.plot(V, V, V, V, V);std::cout << '\n';
-    // s.plot(V, V, V, V, V, V, V);std::cout << '\n';
+    std::vector<double> x(count);
+    std::vector<double> y(count);
 
-    std::cout << "\n\n\n";
+    for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx); }
 
-    s.plot(V, V);std::cout << '\n';
-    s.plot(V, V, L);std::cout << '\n';
+    std::cout << maxVal << '\n';
+    std::cout << x << '\n';
+    std::cout << y << '\n';
 
-    std::cout << "\n\n\n";
-
-    s.plot(V, L, V, L, V, L);std::cout << '\n';
-    s.plot(V, L, V, L, V, L, V, L, V, L);std::cout << '\n';
-    s.plot(V, L, V, L, V, L, V, L, V, L, V, L);std::cout << '\n';
-
-    std::cout << "\n\n\n";
-
-    s.plot(V, V,    V, V   );std::cout << '\n';
-    s.plot(V, V,    V, V, L);std::cout << '\n';
-    s.plot(V, V, L, V, V   );std::cout << '\n';
-    s.plot(V, V, L, V, V, L);std::cout << '\n';
-
-    std::cout << "\n\n\n";
-
-    s.plot(V, V,    V, V,    V, V   );std::cout << '\n';
-    s.plot(V, V,    V, V,    V, V, L);std::cout << '\n';
-    s.plot(V, V,    V, V, L, V, V   );std::cout << '\n';
-    s.plot(V, V,    V, V, L, V, V, L);std::cout << '\n';
-    s.plot(V, V, L, V, V,    V, V   );std::cout << '\n';
-    s.plot(V, V, L, V, V,    V, V, L);std::cout << '\n';
-    s.plot(V, V, L, V, V, L, V, V   );std::cout << '\n';
-    s.plot(V, V, L, V, V, L, V, V, L);std::cout << '\n';
-
-    // clang-format on
+    s.plot(x, y);
 
     return 0;
 }
