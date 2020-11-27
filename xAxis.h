@@ -2,9 +2,9 @@
 #include "axis.h"
 #include "line.h"
 #include "svg.h"
+#include "text.h"
 
-template<typename D = double>
-class XAxis : public Axis<D>
+class XAxis : public Axis
 {
 public:
     XAxis(const svg& s)
@@ -16,10 +16,12 @@ public:
 
         for(size_t i = 0; i < this->_tickAmount; i++)
         {
-            D pos = this->_minVal + i * this->_tickIncrement;
-            this->_drawables.emplace_back(std::make_shared<Line<D>>(Line<D>(pos, 0, pos, 0)));
+            double pos = this->_minVal + i * this->_tickIncrement;
+            this->_drawables.emplace_back(std::make_shared<Line>(Line(pos, s.pixelSize * 10, pos, -s.pixelSize * 5)));
+            this->_drawables.emplace_back(
+            std::make_shared<Text>(Text(pos - s.pixelSize * 3, s.pixelSize * 3 * 5, std::to_string(pos))));
         }
-        this->_drawables.emplace_back(std::make_shared<Line<D>>(Line<D>(this->_minVal, 0, this->_maxVal, 0)));
+        this->_drawables.emplace_back(std::make_shared<Line>(Line(this->_minVal, 0, this->_maxVal, 0)));
     }
     virtual ~XAxis() = default;
 

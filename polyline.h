@@ -20,7 +20,7 @@ public:
 
     ~polyline() = default;
 
-    virtual std::string print() const override
+    virtual std::string print(const svg* const s) const override
     {
         std::stringstream ss;
         ss << "<polyline points=\"";

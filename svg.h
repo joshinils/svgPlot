@@ -42,8 +42,8 @@ public:
 
         for(size_t i = 0; i + 1 < std::min(x.size(), y.size()); i++)
         {
-            auto b = Line<double>(x[i], y[i], x[i + 1], y[i + 1]);
-            auto a = std::make_shared<Line<double>>(b);
+            auto b = Line(x[i], y[i], x[i + 1], y[i + 1]);
+            auto a = std::make_shared<Line>(b);
             this->drawables.emplace_back(a);
         }
     }
@@ -138,12 +138,11 @@ public:
 private:
     mutable bool writeOnDestruct = true;
 
-    template<typename T>
     friend class Axis;
-    template<typename T>
     friend class XAxis;
-    template<typename T>
     friend class YAxis;
+    friend class Line;
+    friend class Text;
 
     // axis limits
     double minX = std::numeric_limits<double>::max();
@@ -151,8 +150,9 @@ private:
     double minY = std::numeric_limits<double>::max();
     double maxY = std::numeric_limits<double>::min();
 
-    double apparentWidth  = 1000;
-    double apparentHeight = 1000;
+    double apparentWidth     = 1000;
+    double apparentHeight    = 1000;
+    mutable double pixelSize = 2;
 
     std::vector<std::shared_ptr<svgDrawable>> drawables;
 };

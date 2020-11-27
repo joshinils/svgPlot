@@ -4,7 +4,6 @@
 #include <sstream>
 #include <vector>
 
-template<typename D = double>
 class Axis : public svgDrawable
 {
 public:
@@ -20,20 +19,20 @@ public:
         this->_width         = this->_span / 10;
     }
 
-    virtual std::string print() const override
+    virtual std::string print(const svg* const s) const override
     {
         std::stringstream ss;
-        for(const auto& e : this->_drawables) ss << e->print();
+        for(const auto& e : this->_drawables) ss << e->print(s);
         return ss.str();
     }
 
 protected:
-    D _minVal;
-    D _maxVal;
-    D _span;
+    double _minVal;
+    double _maxVal;
+    double _span;
     size_t _tickAmount;
-    D _tickIncrement;
-    D _width;
+    double _tickIncrement;
+    double _width;
 
     std::vector<std::shared_ptr<svgDrawable>> _drawables;
 };

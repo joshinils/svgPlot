@@ -28,6 +28,8 @@ add_library(svg
     "xAxis.cpp"
     "yAxis.h"
     "yAxis.cpp"
+    "text.h"
+    "text.cpp"
 )
 
 add_library(svg::svg ALIAS svg)
