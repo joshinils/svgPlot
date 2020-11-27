@@ -12,7 +12,7 @@
 class svg
 {
 public:
-    svg();
+    svg(const std::string& fileName);
     ~svg();
 
     void print() const;
@@ -153,6 +153,7 @@ private:
     double apparentWidth     = 1000;
     double apparentHeight    = 1000;
     mutable double pixelSize = 2;
+    std::string filename;
 
     std::vector<std::shared_ptr<svgDrawable>> drawables;
 };

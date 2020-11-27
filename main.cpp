@@ -13,24 +13,57 @@ std::ostream& operator<<(std::ostream& ostr, const std::vector<T>& v)
 
 int main()
 {
-    svg s;
+    {
+        svg s("filename1.svg");
 
-    size_t count  = 100;
-    double minVal = 0 + 1;
-    double maxVal = std::acos(-1) * 2 + 1;
-    double range  = maxVal - minVal;
-    double dx     = range / (count - 1);
+        // generate data to plot
+        size_t count  = 100;
+        double minVal = 0 - 1;
+        double maxVal = std::acos(-1) * 2 - 1;
+        double range  = maxVal - minVal;
+        double dx     = range / (count - 1);
 
-    std::vector<double> x(count);
-    std::vector<double> y(count);
+        std::vector<double> x(count);
+        std::vector<double> y(count);
 
-    for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx) * .5 + 120; }
+        for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx) * .5 + 120; }
 
-    std::cout << maxVal << '\n';
-    std::cout << x << '\n';
-    std::cout << y << '\n';
+        // print data to plot
+        std::cout << maxVal << '\n';
+        std::cout << x << '\n';
+        std::cout << y << '\n';
 
-    s.plot(x, y);
+        // plot data
+        s.plot(x, y);
+
+        // svg s will write to file from the destructor
+    }
+
+    {
+        svg s("filename2.svg");
+
+        // generate data to plot
+        size_t count  = 100;
+        double minVal = 0 - 1;
+        double maxVal = std::acos(-1) * 2 - 1;
+        double range  = maxVal - minVal;
+        double dx     = range / (count - 1);
+
+        std::vector<double> x(count);
+        std::vector<double> y(count);
+
+        for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx) * 50 + 120; }
+
+        // print data to plot
+        std::cout << maxVal << '\n';
+        std::cout << x << '\n';
+        std::cout << y << '\n';
+
+        // plot data
+        s.plot(x, y);
+
+        // svg s will write to file from the destructor
+    }
 
     return 0;
 }

@@ -3,7 +3,19 @@
 #include "yAxis.h"
 #include <fstream>
 
-svg::svg() { }
+svg::svg(const std::string& fileName)
+    : filename(fileName)
+{
+    // remove extension, if given
+    if(size_t s = filename.size();
+       s >= 4 && filename[s - 4] == '.' && filename[s - 3] == 's' && filename[s - 2] == 'v' && filename[s - 1] == 'g')
+    {
+        filename.pop_back();
+        filename.pop_back();
+        filename.pop_back();
+        filename.pop_back();
+    }
+}
 
 svg::~svg()
 {
@@ -14,7 +26,7 @@ void svg::print() const
 {
     this->writeOnDestruct = false;
 
-    std::ofstream fout("filename.svg");
+    std::ofstream fout(filename + ".svg");
     if(!fout) throw "could not open file to write into!";
 
     double pixelWidth  = (this->maxX - this->minX) / this->apparentWidth;
