@@ -17,10 +17,6 @@ void svg::print() const
     std::ofstream fout("filename.svg");
     if(!fout) throw "could not open file to write into!";
 
-    fout << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg ";
-    if(this->apparentWidth > 0) fout << "width=\"" << this->apparentWidth << "px\" ";
-    if(this->apparentHeight > 0) fout << "height=\"" << this->apparentHeight << "px\" ";
-
     double pixelWidth  = (this->maxX - this->minX) / this->apparentWidth;
     double pixelHeight = (this->maxY - this->minY) / this->apparentHeight;
 
@@ -29,11 +25,17 @@ void svg::print() const
 
     pixelSize = std::max(pixelWidth, pixelHeight);
 
+    fout << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<svg ";
+
+    if(this->apparentWidth > 0) fout << "width=\"" << this->apparentWidth << "px\" ";
+    if(this->apparentHeight > 0) fout << "height=\"" << this->apparentHeight << "px\" ";
+
+
     XAxis xAxis(*this);
     YAxis yAxis(*this);
 
-    fout << "viewBox=\"" << this->minX << ' ' << -this->maxY << ' ' << this->maxX - this->minX << ' '
-         << this->maxY - this->minY << "\" ";
+    fout << "viewBox=\"" << this->minX - pixelSize * 40 << ' ' << -(this->maxY + pixelSize * 70) << ' '
+         << this->maxX - this->minX + pixelSize * 100 << ' ' << this->maxY - this->minY + pixelSize * 110 << "\" ";
 
 
     fout << "xmlns=\"http://www.w3.org/2000/svg\">\n";

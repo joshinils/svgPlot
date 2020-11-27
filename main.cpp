@@ -16,15 +16,15 @@ int main()
     svg s;
 
     size_t count  = 100;
-    double minVal = 0;
-    double maxVal = std::acos(-1) * 2;
+    double minVal = 0 + 1;
+    double maxVal = std::acos(-1) * 2 + 1;
     double range  = maxVal - minVal;
     double dx     = range / (count - 1);
 
     std::vector<double> x(count);
     std::vector<double> y(count);
 
-    for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx); }
+    for(size_t i = 0; i < count; i++) { y[i] = std::sin(x[i] = minVal + i * dx) * .5 + 120; }
 
     std::cout << maxVal << '\n';
     std::cout << x << '\n';
